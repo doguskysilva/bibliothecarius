@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "bibliothecarius"
+version = "0.1.0"
+description = "A cli application to manager canons, translates and books"
+authors = ["Douglas Silva <dogusky@protonmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pytest = "^8.2.2"
+alembic = "^1.13.1"
+click = "^8.1.7"
+python-dotenv = "^1.0.1"
+requests = "^2.32.3"
+sqlalchemy = "^2.0.30"
+pytest-mock = "^3.14.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
