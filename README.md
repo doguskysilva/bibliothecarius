@@ -11,3 +11,8 @@ To leave
 ```bash
 exit
 ```
+
+## To restart database
+```bash
+rm database/scripturas.sqlite &&  alembic -x data=true upgrade head
+```
