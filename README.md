@@ -16,3 +16,8 @@ exit
 ```bash
 rm database/scripturas.sqlite &&  alembic -x data=true upgrade head
 ```
+
+## To load books
+```bash
+bibliothecarius sync-books ./resources/books.csv
+```
