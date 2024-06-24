@@ -131,6 +131,4 @@ dmypy.json
 # Sqlite
 *.sqlite
 
-*.csv
-
 .DS_Store

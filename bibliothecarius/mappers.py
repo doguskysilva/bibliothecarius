@@ -6,6 +6,6 @@ def row_to_book(row: dict) -> Book:
         book_id=row["id"],
         testament=row["testament"],
         name=row["name"],
-        abbreviation=row["abbreviation"],
+        abbreviation=row["name"].replace("_", "")[:3],
         total_chapters=row["chapters"],
     )
