@@ -2,7 +2,10 @@ import click
 import os
 from dotenv import load_dotenv
 
-from bibliothecarius.controller import sync_file_to_database
+from bibliothecarius.controller import (
+    sync_books_to_database,
+    sync_translations_to_database,
+)
 from bibliothecarius.context import db_session
 
 
@@ -32,7 +35,15 @@ def hello():
 @click.pass_context
 def sync_books(ctx, filename):
     click.echo("Start sync books")
-    sync_file_to_database(filename, ctx.obj.db_session)
+    sync_books_to_database(filename, ctx.obj.db_session)
+
+
+@cli.command()
+@click.argument("filename", type=click.Path(exists=True))
+@click.pass_context
+def sync_translations(ctx, filename):
+    click.echo("Start sync translations")
+    sync_translations_to_database(filename, ctx.obj.db_session)
 
 
 def main():
