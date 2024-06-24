@@ -6,7 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 
 from bibliothecarius.models.base import Base
-from bibliothecarius.models.book import Book
+from bibliothecarius.models import *
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
