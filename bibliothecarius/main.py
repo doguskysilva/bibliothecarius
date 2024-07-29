@@ -48,6 +48,14 @@ def sync_canons(ctx, filename):
 
 
 @cli.command()
+@click.option("-c", "--canon", type=str)
+@click.option("-b", "--books", type=click.Path(exists=True))
+@click.pass_context
+def relation_canon_books(ctx, canon, books):
+    click.echo(f"Start relation books to {canon}")
+
+
+@cli.command()
 @click.argument("filename", type=click.Path(exists=True))
 @click.pass_context
 def sync_translations(ctx, filename):
