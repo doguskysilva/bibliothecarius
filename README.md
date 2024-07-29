@@ -21,3 +21,8 @@ rm database/scripturas.sqlite &&  alembic -x data=true upgrade head
 ```bash
 bibliothecarius sync-books ./resources/books.csv
 ```
+
+## To load canons
+```bash
+bibliothecarius sync-canons ./resources/canons.csv
+```

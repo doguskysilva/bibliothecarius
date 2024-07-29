@@ -1,4 +1,5 @@
 from bibliothecarius.models.book import Book
+from bibliothecarius.models.canon import Canon
 from bibliothecarius.models.translation import Translation
 
 
@@ -9,6 +10,15 @@ def row_to_book(row: dict) -> Book:
         name=row["name"],
         abbreviation=row["name"].replace("_", "")[:3],
         total_chapters=row["chapters"],
+    )
+
+
+def row_to_canon(row: dict) -> Canon:
+    return Canon(
+        canon_id=row["id"],
+        name=row["name"],
+        tradition=row["tradition"],
+        total_books=row["total_books"]
     )
 
 

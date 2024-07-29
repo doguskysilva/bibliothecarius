@@ -1,2 +1,3 @@
 from .book import Book
-from .translation import Translation
+from .canon import Canon
+#from .translation import Translation
