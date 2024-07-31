@@ -32,3 +32,7 @@ bibliothecarius sync-canons ./resources/canons.csv
 bibliothecarius relation-canon-books  --canon roman_catholic --books ./resources/canons/roman_catholic_canon.csv
 ```
 
+## List a canon
+```bash
+bibliothecarius list-books --canon protestant
+```

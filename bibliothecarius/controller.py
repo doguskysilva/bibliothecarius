@@ -59,3 +59,13 @@ def mount_canon(canon_name: str, filename: str, session: Session):
 
             canon.books.append(relation)
             session.commit()
+
+
+def get_all_canons(session: Session):
+    canon_repository = CanonRepository(session)
+    return canon_repository.get_all()
+
+
+def get_canon_by_name(canon_name: str, session: Session):
+    canon_repository = CanonRepository(session)
+    return canon_repository.get_by_name(canon_name)

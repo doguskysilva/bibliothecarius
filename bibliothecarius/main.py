@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 
 from bibliothecarius.controller import (
+    get_canon_by_name,
     mount_canon,
     sync_books_to_database,
     sync_canons_to_database,
@@ -55,6 +56,17 @@ def sync_canons(ctx, filename):
 def relation_canon_books(ctx, canon, books):
     click.echo(f"Start relation books to {canon}")
     mount_canon(canon, books, ctx.obj.db_session)
+
+
+@cli.command()
+@click.option("-c", "--canon", "canon_name",
+              type=click.Choice(['roman_catholics', 'protestant'],
+                                case_sensitive=False))
+@click.pass_context
+def list_books(ctx, canon_name):
+    canon = get_canon_by_name(canon_name, ctx.obj.db_session)
+    for relation in canon.books:
+        click.echo(relation.book.name)
 
 
 @cli.command()
