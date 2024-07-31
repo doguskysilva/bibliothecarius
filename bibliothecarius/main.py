@@ -66,7 +66,7 @@ def relation_canon_books(ctx, canon, books):
 def list_books(ctx, canon_name):
     canon = get_canon_by_name(canon_name, ctx.obj.db_session)
     for relation in canon.books:
-        click.echo(relation.book.name)
+        click.echo(f"{relation.sort_index} - {relation.book.name}")
 
 
 @cli.command()
