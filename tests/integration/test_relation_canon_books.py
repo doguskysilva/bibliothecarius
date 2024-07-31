@@ -24,11 +24,11 @@ def test_relation_canon_books(runner: CliRunner, bibliothecarius_context):
     canon_repository.create_canons([canon])
 
     assert len(book_repository.get_all()) == 1
-    assert len(canon_repository.get_all()) == 1
+    assert canon_repository.get_by_name("any-canon").canon_id == 2001
 
     with runner.isolated_filesystem():
         with open("books.csv", "w") as file:
-            file.write("book_id;sort_index\n1001;1")
+            file.write("book_id,sort_index\n1001,1")
 
         result = runner.invoke(
             cli,

@@ -1,80 +1,80 @@
-id;name;visible_name;chapters;testament;protestant;catholoic;ortodox
-1001;genesis;Gênesis;50;old;50;50;50
-1002;exodus;Êxodo;40;old;40;40;40
-1003;leviticus;Levítico;27;old;27;27;27
-1004;numbers;Números;36;old;36;36;36
-1005;deutoronomy;Deuteronômio;34;old;34;34;34
-1006;joshua;Josué;24;old;24;24;24
-1007;judges;Juízes;21;old;21;21;21
-1008;ruth;Rute;4;old;4;4;4
-1009;1_samuel;1 Samuel;31;old;31;31;31
-1010;2_samuel;2 Samuel;24;old;24;24;24
-1011;1_kings;1 Reis;22;old;22;22;22
-1012;2_kings;2 Reis;25;old;25;25;25
-1013;1_chronicles;1 Crônicas;29;old;29;29;29
-1014;2_chronicles;2 Crônicas;36;old;36;36;36
-1015;ezra;Esdras;10;old;10;10;10
-1016;nehemiah;Neemias;13;old;13;13;13
-1017;tobit;Tobias;14;old;0;14;14
-1018;judith;Judite;16;old;0;16;16
-1019;esther;Ester;10;old;10;0;0
-1020;esther;Ester;16;old;0;16;16
-1021;job;Jó;42;old;42;42;42
-1022;psalms;Salmos;150;old;150;150;0
-1023;psalms_151;Salmos;151;old;0;0;151
-1024;1_maccabees;1 Macabeus;16;old;0;16;16
-1025;2_maccabees;2 Macabeus;15;old;0;15;15
-1026;3_maccabees;3 Macabeus;16;old;0;0;16
-1027;4_maccabees;4 Macabeus;10;old;0;0;10
-1028;proverbs;Provérbios;31;old;31;31;31
-1029;ecclesiastes;Eclesiastes;12;old;12;12;12
-1030;song_of_solomon;Cantares de Salomão;8;old;8;8;8
-1031;wisdom_of_solomon;Sabedoria de Salomão;19;old;0;19;19
-1032;ecclesiastes;Eclesiástico (Sirácida);51;old;0;51;51
-1033;isaiah;Isaías;66;old;66;66;66
-1034;jeremiah;Jeremias;52;old;52;52;52
-1035;lamentations;Lamentações de Jeremias;5;old;5;5;5
-1036;baruch;Baruque;6;old;0;6;6
-1037;letter_of_jeremiah;Carta de Jeremias;1;old;0;0;1
-1038;ezekiel;Ezequiel;48;old;48;48;48
-1039;daniel;Daniel;12;old;12;0;0
-1040;daniel_bel_susanna;Daniel;14;old;0;14;14
-1041;hosea;Oséias;14;old;14;14;14
-1042;joel;Joel;4;old;4;4;4
-1043;amos;Amós;9;old;9;9;9
-1044;obadiah;Obadias;1;old;1;1;1
-1045;jonah;Jonas;4;old;4;4;4
-1046;micah;Miquéias;7;old;7;7;7
-1047;nahum;Naum;3;old;3;3;3
-1048;habakkuk;Habacuque;3;old;3;3;3
-1049;zephaniah;Sofonias;3;old;3;3;3
-1050;haggai;Ageu;2;old;2;2;2
-1051;zechariah;Zacarias;14;old;14;14;14
-1052;malachi;Malaquias;4;old;3;3;3
-1053;matthew;Mateus;28;new;28;28;28
-1054;mark;Marcos;16;new;16;16;16
-1055;luke;Lucas;24;new;24;24;24
-1056;john;João;21;new;21;21;21
-1057;acts;Atos dos Apóstolos;28;new;28;28;28
-1058;romans;Romanos;16;new;16;16;16
-1059;1_corinthians;1 Coríntios;16;new;16;16;16
-1060;2_corinthians;2 Coríntios;13;new;13;13;13
-1061;galatians;Gálatas;6;new;6;6;6
-1062;ephesians;Efésios;6;new;6;6;6
-1063;philippians;Filipenses;4;new;4;4;4
-1064;colossians;Colossenses;4;new;4;4;4
-1065;1_thessalonians;1 Tessalonicenses;5;new;5;5;5
-1066;2_thessalonians;2 Tessalonicenses;3;new;3;3;3
-1067;1_timothy;1 Timóteo;6;new;6;6;6
-1068;2_timothy;2 Timóteo;4;new;4;4;4
-1069;titus;Tito;3;new;3;3;3
-1070;philemon;Filemom;1;new;1;1;1
-1071;hebrews;Hebreus;13;new;13;13;13
-1072;james;Tiago;5;new;5;5;5
-1073;1_peter;1 Pedro;5;new;5;5;5
-1074;2_peter;2 Pedro;3;new;3;3;3
-1075;1_john;1 João;5;new;5;5;5
-1076;2_john;2 João;1;new;1;1;1
-1077;3_john;3 João;1;new;1;1;1
-1078;jude;Judas;1;new;1;1;1
-1079;revelation;Apocalipse (Revelação);22;new;22;22;22
+id,name,visible_name,chapters,testament,protestant,catholoic,ortodox
+1001,genesis,Gênesis,50,old,50,50,50
+1002,exodus,Êxodo,40,old,40,40,40
+1003,leviticus,Levítico,27,old,27,27,27
+1004,numbers,Números,36,old,36,36,36
+1005,deutoronomy,Deuteronômio,34,old,34,34,34
+1006,joshua,Josué,24,old,24,24,24
+1007,judges,Juízes,21,old,21,21,21
+1008,ruth,Rute,4,old,4,4,4
+1009,1_samuel,1 Samuel,31,old,31,31,31
+1010,2_samuel,2 Samuel,24,old,24,24,24
+1011,1_kings,1 Reis,22,old,22,22,22
+1012,2_kings,2 Reis,25,old,25,25,25
+1013,1_chronicles,1 Crônicas,29,old,29,29,29
+1014,2_chronicles,2 Crônicas,36,old,36,36,36
+1015,ezra,Esdras,10,old,10,10,10
+1016,nehemiah,Neemias,13,old,13,13,13
+1017,tobit,Tobias,14,old,0,14,14
+1018,judith,Judite,16,old,0,16,16
+1019,esther,Ester,10,old,10,0,0
+1020,esther,Ester,16,old,0,16,16
+1021,job,Jó,42,old,42,42,42
+1022,psalms,Salmos,150,old,150,150,0
+1023,psalms_151,Salmos,151,old,0,0,151
+1024,1_maccabees,1 Macabeus,16,old,0,16,16
+1025,2_maccabees,2 Macabeus,15,old,0,15,15
+1026,3_maccabees,3 Macabeus,16,old,0,0,16
+1027,4_maccabees,4 Macabeus,10,old,0,0,10
+1028,proverbs,Provérbios,31,old,31,31,31
+1029,ecclesiastes,Eclesiastes,12,old,12,12,12
+1030,song_of_solomon,Cantares de Salomão,8,old,8,8,8
+1031,wisdom_of_solomon,Sabedoria de Salomão,19,old,0,19,19
+1032,ecclesiastes,Eclesiástico (Sirácida),51,old,0,51,51
+1033,isaiah,Isaías,66,old,66,66,66
+1034,jeremiah,Jeremias,52,old,52,52,52
+1035,lamentations,Lamentações de Jeremias,5,old,5,5,5
+1036,baruch,Baruque,6,old,0,6,6
+1037,letter_of_jeremiah,Carta de Jeremias,1,old,0,0,1
+1038,ezekiel,Ezequiel,48,old,48,48,48
+1039,daniel,Daniel,12,old,12,0,0
+1040,daniel_bel_susanna,Daniel,14,old,0,14,14
+1041,hosea,Oséias,14,old,14,14,14
+1042,joel,Joel,4,old,4,4,4
+1043,amos,Amós,9,old,9,9,9
+1044,obadiah,Obadias,1,old,1,1,1
+1045,jonah,Jonas,4,old,4,4,4
+1046,micah,Miquéias,7,old,7,7,7
+1047,nahum,Naum,3,old,3,3,3
+1048,habakkuk,Habacuque,3,old,3,3,3
+1049,zephaniah,Sofonias,3,old,3,3,3
+1050,haggai,Ageu,2,old,2,2,2
+1051,zechariah,Zacarias,14,old,14,14,14
+1052,malachi,Malaquias,4,old,3,3,3
+1053,matthew,Mateus,28,new,28,28,28
+1054,mark,Marcos,16,new,16,16,16
+1055,luke,Lucas,24,new,24,24,24
+1056,john,João,21,new,21,21,21
+1057,acts,Atos dos Apóstolos,28,new,28,28,28
+1058,romans,Romanos,16,new,16,16,16
+1059,1_corinthians,1 Coríntios,16,new,16,16,16
+1060,2_corinthians,2 Coríntios,13,new,13,13,13
+1061,galatians,Gálatas,6,new,6,6,6
+1062,ephesians,Efésios,6,new,6,6,6
+1063,philippians,Filipenses,4,new,4,4,4
+1064,colossians,Colossenses,4,new,4,4,4
+1065,1_thessalonians,1 Tessalonicenses,5,new,5,5,5
+1066,2_thessalonians,2 Tessalonicenses,3,new,3,3,3
+1067,1_timothy,1 Timóteo,6,new,6,6,6
+1068,2_timothy,2 Timóteo,4,new,4,4,4
+1069,titus,Tito,3,new,3,3,3
+1070,philemon,Filemom,1,new,1,1,1
+1071,hebrews,Hebreus,13,new,13,13,13
+1072,james,Tiago,5,new,5,5,5
+1073,1_peter,1 Pedro,5,new,5,5,5
+1074,2_peter,2 Pedro,3,new,3,3,3
+1075,1_john,1 João,5,new,5,5,5
+1076,2_john,2 João,1,new,1,1,1
+1077,3_john,3 João,1,new,1,1,1
+1078,jude,Judas,1,new,1,1,1
+1079,revelation,Apocalipse (Revelação),22,new,22,22,22

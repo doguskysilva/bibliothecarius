@@ -14,7 +14,7 @@ def test_sync_canons(runner: CliRunner, bibliothecarius_context):
     with runner.isolated_filesystem():
         with open("canons.csv", "w") as file:
             file.write(
-                "id;name;tradition;total_books\n1001;protestant;ocidental;42"
+                "id,name,tradition,total_books\n1001,protestant,ocidental,42"
             )
 
         result = runner.invoke(

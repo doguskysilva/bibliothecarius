@@ -14,7 +14,7 @@ def test_sync_books(runner: CliRunner, bibliothecarius_context):
     with runner.isolated_filesystem():
         with open("books.csv", "w") as file:
             file.write(
-                "id;name;testament;chapters\n1001;Genesis;old;50"
+                "id,name,testament,chapters\n1001,Genesis,old,50"
             )
 
         result = runner.invoke(
