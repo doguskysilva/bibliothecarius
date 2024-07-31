@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 
 from bibliothecarius.controller import (
+    mount_canon,
     sync_books_to_database,
     sync_canons_to_database,
     sync_translations_to_database,
@@ -53,6 +54,7 @@ def sync_canons(ctx, filename):
 @click.pass_context
 def relation_canon_books(ctx, canon, books):
     click.echo(f"Start relation books to {canon}")
+    mount_canon(canon, books, ctx.obj.db_session)
 
 
 @cli.command()

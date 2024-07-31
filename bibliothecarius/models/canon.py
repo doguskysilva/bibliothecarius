@@ -11,7 +11,10 @@ class BookCanon(Base):
     canon_id: Mapped[int] = mapped_column(ForeignKey("canons.canon_id"))
     book_id: Mapped[int] = mapped_column(ForeignKey("books.book_id"))
     sort_index: Mapped[int]
-    child: Mapped["Book"] = relationship()
+    book: Mapped["Book"] = relationship()
+
+    def __repr__(self) -> str:
+        return f"{self.book.name} - {self.sort_index}"
 
 
 class Canon(Base):

@@ -1,5 +1,6 @@
 import csv
 
+from bibliothecarius.models.canon import BookCanon
 from bibliothecarius.mappers import (
     row_to_book,
     row_to_canon,
@@ -44,10 +45,17 @@ def sync_translations_to_database(filename: str, session: Session):
 
 def mount_canon(canon_name: str, filename: str, session: Session):
     canon_repository = CanonRepository(session)
+    book_repository = BookRepository(session)
+
     canon = canon_repository.get_by_name(canon_name)
 
     with open(filename, "r") as text_wrapper:
         csv_reader = csv.DictReader(text_wrapper, delimiter=",")
-        books_cannon = [row_to_canon_book(canon.canon_id, row) for row in csv_reader]
 
-        print(books_cannon)
+        for row in csv_reader:
+            canon_book = row_to_canon_book(canon.canon_id, row)
+            relation = BookCanon(sort_index=canon_book.sort_index)
+            relation.book = book_repository.get_by_id(canon_book.book_id)
+
+            canon.books.append(relation)
+            session.commit()

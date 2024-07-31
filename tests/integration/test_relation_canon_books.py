@@ -38,4 +38,5 @@ def test_relation_canon_books(runner: CliRunner, bibliothecarius_context):
         assert result.exit_code == 0
         assert "Start relation books to any-canon" in result.output
 
-        # assert len(book_repository.get_all()) == 1
+        canon_saved = canon_repository.get_by_name("any-canon")
+        assert len(canon_saved.books) == 1

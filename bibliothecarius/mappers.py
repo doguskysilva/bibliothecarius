@@ -1,3 +1,4 @@
+from bibliothecarius import entities
 from bibliothecarius.models.book import Book
 from bibliothecarius.models.canon import Canon
 from bibliothecarius.models.translation import Translation
@@ -32,4 +33,12 @@ def row_to_translation(row: dict) -> Translation:
         country=row["country"],
         total_books=row["total_books"],
         total_verses=row["total_verses"]
+    )
+
+
+def row_to_canon_book(canon_id: int, row: dict) -> entities.CanonBook:
+    return entities.CanonBook(
+        canon_id=canon_id,
+        book_id=row["book_id"],
+        sort_index=row["sort_index"]
     )
