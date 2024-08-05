@@ -17,12 +17,12 @@ exit
 rm database/scripturas.sqlite &&  alembic -x data=true upgrade head
 ```
 
-## To load books
+## Load books
 ```bash
 bibliothecarius sync-books ./resources/books.csv
 ```
 
-## To load canons
+## Load canons
 ```bash
 bibliothecarius sync-canons ./resources/canons.csv
 ```
@@ -35,4 +35,8 @@ bibliothecarius relation-canon-books  --canon roman_catholic --books ./resources
 ## List a canon
 ```bash
 bibliothecarius list-books --canon protestant
+```
+## Load translations
+```bash
+bibliothecarius sync-translations ./resources/translations.csv
 ```

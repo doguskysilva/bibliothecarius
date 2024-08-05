@@ -1,7 +1,8 @@
 from bibliothecarius.mappers import (
     row_to_book,
     row_to_canon,
-    row_to_canon_book
+    row_to_canon_book,
+    row_to_translation,
 )
 
 
@@ -44,3 +45,25 @@ def test_row_to_canon_book():
     assert output.canon_id == canon_id
     assert output.book_id == row["book_id"]
     assert output.sort_index == row["sort_index"]
+
+
+def test_row_to_translation():
+    row = {
+        "id": 1,
+        "name": "any-name",
+        "description": "any-description",
+        "language": "pt",
+        "country": "br",
+        "total_verses": 42,
+        "canon_id": 1,
+    }
+    output = row_to_translation(row)
+
+    assert output.translation_id == row["id"]
+    assert output.canon_id == row["canon_id"]
+    assert output.name == row["name"]
+    assert output.description == row["description"]
+    assert output.language == row["language"]
+    assert output.country == row["country"]
+    assert output.total_verses == row["total_verses"]
+    assert output.abbreviation == "pt-br"

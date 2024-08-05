@@ -1,11 +1,13 @@
 import csv
 
+import click
+
 from bibliothecarius.models.canon import BookCanon
 from bibliothecarius.mappers import (
     row_to_book,
     row_to_canon,
     row_to_canon_book,
-    row_to_translation
+    row_to_translation,
 )
 from sqlalchemy.orm import Session
 from bibliothecarius.repository import (
@@ -20,9 +22,8 @@ def sync_books_to_database(filename: str, session: Session):
 
     with open(filename, "r") as text_wrapper:
         csv_reader = csv.DictReader(text_wrapper, delimiter=",")
-        for row in csv_reader:
-            book = row_to_book(row)
-            book_repository.create_book(book)
+        books = [row_to_book(book) for book in csv_reader]
+        book_repository.create_books(books)
 
 
 def sync_canons_to_database(filename: str, session: Session):
@@ -51,14 +52,19 @@ def mount_canon(canon_name: str, filename: str, session: Session):
 
     with open(filename, "r") as text_wrapper:
         csv_reader = csv.DictReader(text_wrapper, delimiter=",")
+        books_canon = [row_to_canon_book(canon.canon_id, row) for row in csv_reader]
 
-        for row in csv_reader:
-            canon_book = row_to_canon_book(canon.canon_id, row)
-            relation = BookCanon(sort_index=canon_book.sort_index)
-            relation.book = book_repository.get_by_id(canon_book.book_id)
-
-            canon.books.append(relation)
-            session.commit()
+        if canon.total_books == len(books_canon):
+            for book_canon in books_canon:
+                relation = BookCanon(sort_index=book_canon.sort_index)
+                relation.book = book_repository.get_by_id(book_canon.book_id)
+                canon.books.append(relation)
+                session.commit()
+        else:
+            exception = click.ClickException(
+                f"Was expected {canon.total_books} book, but resource has {len(books_canon)}"
+            )
+            exception.show()
 
 
 def get_all_canons(session: Session):

@@ -1,6 +1,7 @@
 from typing import List
-from sqlalchemy import select
+from sqlalchemy import insert, select
 from sqlalchemy.orm import Session
+from bibliothecarius import entities
 from bibliothecarius.models.book import Book
 from bibliothecarius.models.canon import Canon
 from bibliothecarius.models.translation import Translation
@@ -17,10 +18,10 @@ class BookRepository:
     def get_all(self):
         return self.session.query(Book).all()
 
-    def create_book(self, book: Book):
-        with self.session as session:
-            session.add(book)
-            session.commit()
+    def create_books(self, books: List[entities.Book]):
+        stmt = insert(Book).returning(Book)
+        self.session.scalars(stmt, [book._asdict() for book in books])
+        self.session.commit()
 
 
 class CanonRepository:
@@ -34,10 +35,10 @@ class CanonRepository:
         stmt = select(Canon).where(Canon.name == name)
         return self.session.scalars(stmt).first()
 
-    def create_canons(self, canons: List[Canon]):
-        with self.session as session:
-            session.add_all(canons)
-            session.commit()
+    def create_canons(self, canons: List[entities.Canon]):
+        stmt = insert(Canon).returning(Canon)
+        self.session.scalars(stmt, [canon._asdict() for canon in canons])
+        self.session.commit()
 
 
 class TranslationRepository:
@@ -45,9 +46,12 @@ class TranslationRepository:
         self.session = session
 
     def get_all(self):
-        return self.session.query(Translation).all()
+        stmt = select(Translation)
+        return self.session.scalars(stmt).all()
 
-    def create_translations(self, translations: List[Translation]):
-        with self.session as session:
-            session.add_all(translations)
-            session.commit()
+    def create_translations(self, translations: List[entities.Translation]):
+        stmt = insert(Translation).returning(Translation)
+        self.session.scalars(
+            stmt, [translation._asdict() for translation in translations]
+        )
+        self.session.commit()

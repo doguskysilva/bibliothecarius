@@ -1,21 +1,18 @@
 from bibliothecarius import entities
-from bibliothecarius.models.book import Book
-from bibliothecarius.models.canon import Canon
-from bibliothecarius.models.translation import Translation
 
 
-def row_to_book(row: dict) -> Book:
-    return Book(
+def row_to_book(row: dict) -> entities.Book:
+    return entities.Book(
         book_id=row["id"],
-        testament=row["testament"],
         name=row["name"],
+        testament=row["testament"],
         abbreviation=row["name"].replace("_", "")[:3],
         total_chapters=row["chapters"],
     )
 
 
-def row_to_canon(row: dict) -> Canon:
-    return Canon(
+def row_to_canon(row: dict) -> entities.Canon:
+    return entities.Canon(
         canon_id=row["id"],
         name=row["name"],
         tradition=row["tradition"],
@@ -23,16 +20,16 @@ def row_to_canon(row: dict) -> Canon:
     )
 
 
-def row_to_translation(row: dict) -> Translation:
-    return Translation(
+def row_to_translation(row: dict) -> entities.Translation:
+    return entities.Translation(
         translation_id=row["id"],
         name=row["name"],
         description=row["description"],
         abbreviation=f"{row["language"]}-{row["country"]}".lower(),
         language=row["language"],
         country=row["country"],
-        total_books=row["total_books"],
-        total_verses=row["total_verses"]
+        total_verses=row["total_verses"],
+        canon_id=row["canon_id"]
     )
 
 

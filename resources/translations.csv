@@ -1,5 +1,5 @@
-id,name,tradition,description,language,country,total_books,total_verses
-1001,"Nova Versão Internacional",protestant,"Descrição",pt,br,66,31105
-1002,"Almeida Corrigida Fiel",protestant,"Descrição",pt,br,66,31106
-1003,"Revista Atualizada",protestant,"Descrição",pt,br,66,31104
-1004,"Ave Maria",catholic,"Description",pt,br,73,70000
+id,name,description,language,country,total_verses,canon_id
+3001,"Nova Versão Internacional","Descrição",pt,br,31105,2002
+3002,"Almeida Corrigida Fiel","Descrição",pt,br,31106,2002
+3003,"Almeida Revista e Atualizada","Descrição",pt,br,31104,2002
+3004,"Ave Maria","Description",pt,br,33000,2001
