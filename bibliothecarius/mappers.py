@@ -39,3 +39,13 @@ def row_to_canon_book(canon_id: int, row: dict) -> entities.CanonBook:
         book_id=row["book_id"],
         sort_index=row["sort_index"]
     )
+
+
+def row_to_verse(translation_id: int, row: dict) -> entities.Verse:
+    return entities.Verse(
+        translation_id=translation_id,
+        book_id=row["book_id"],
+        chapter=row["chapter"],
+        verse_number=row["number"],
+        content=row["text"]
+    )

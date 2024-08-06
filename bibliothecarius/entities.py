@@ -26,3 +26,14 @@ Translation = collections.namedtuple(
         "canon_id",
     ],
 )
+
+Verse = collections.namedtuple(
+    "Verse",
+    [
+        "book_id",
+        "translation_id",
+        "chapter",
+        "verse_number",
+        "content"
+    ]
+)

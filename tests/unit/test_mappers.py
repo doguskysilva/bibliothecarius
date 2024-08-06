@@ -3,6 +3,7 @@ from bibliothecarius.mappers import (
     row_to_canon,
     row_to_canon_book,
     row_to_translation,
+    row_to_verse,
 )
 
 
@@ -67,3 +68,20 @@ def test_row_to_translation():
     assert output.country == row["country"]
     assert output.total_verses == row["total_verses"]
     assert output.abbreviation == "pt-br"
+
+
+def test_row_to_verse():
+    translation_id = 42
+    row = {
+        "book_id": 1,
+        "chapter": 2,
+        "number": 3,
+        "text": "any-text",
+    }
+    output = row_to_verse(translation_id, row)
+
+    assert translation_id == output.translation_id
+    assert row["book_id"] == output.book_id
+    assert row["chapter"] == output.chapter
+    assert row["number"] == output.verse_number
+    assert row["text"] == output.content
