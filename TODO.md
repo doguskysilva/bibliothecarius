@@ -1,2 +1,3 @@
 [] Why the database is not reseting?
-[] Add flow to save the translations!
+[] Add tests to check a version!
+[] Add tests sync a bible
