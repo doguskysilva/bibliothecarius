@@ -80,8 +80,6 @@ class VerseRepository:
         self.session = session
 
     def count_by_translation(self, translation: Translation):
-        # db.session.scalar(db.select(func.count(Order.order_id)))
-
         stmt = select(func.count(Verse.verse_id)).where(
             Verse.translation_id == translation.translation_id
         )
