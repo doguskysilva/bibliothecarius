@@ -41,7 +41,12 @@ bibliothecarius list-books --canon protestant
 bibliothecarius sync-translations ./resources/translations.csv
 ```
 
+## List translations
+```bash
+bibliothecarius list-translations
+```
+
 ## Add a bible
 ```bash
-bibliothecarius bible-add --translation 3001 --verses ./resources/bibles/nvi.csv
+bibliothecarius sync-bible --translation 3001 --bible ./resources/bibles/nvi.csv
 ```

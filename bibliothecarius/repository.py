@@ -1,10 +1,11 @@
 from typing import List
-from sqlalchemy import insert, select
+from sqlalchemy import func, insert, select
 from sqlalchemy.orm import Session
 from bibliothecarius import entities
 from bibliothecarius.models.book import Book
-from bibliothecarius.models.canon import Canon
+from bibliothecarius.models.canon import BookCanon, Canon
 from bibliothecarius.models.translation import Translation
+from bibliothecarius.models.verse import Verse
 
 
 class BookRepository:
@@ -41,6 +42,19 @@ class CanonRepository:
         self.session.commit()
 
 
+class BookCanonRespository:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+
+    def get_by_canon(self, canon: Canon):
+        stmt = (
+            select(BookCanon)
+            .where(BookCanon.canon_id == canon.canon_id)
+            .order_by(BookCanon.sort_index)
+        )
+        return self.session.scalars(stmt).all()
+
+
 class TranslationRepository:
     def __init__(self, session: Session) -> None:
         self.session = session
@@ -49,9 +63,31 @@ class TranslationRepository:
         stmt = select(Translation)
         return self.session.scalars(stmt).all()
 
+    def by_id(self, id: int):
+        stmt = select(Translation).where(Translation.translation_id == id)
+        return self.session.scalars(stmt).first()
+
     def create_translations(self, translations: List[entities.Translation]):
         stmt = insert(Translation).returning(Translation)
         self.session.scalars(
             stmt, [translation._asdict() for translation in translations]
         )
+        self.session.commit()
+
+
+class VerseRepository:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+
+    def count_by_translation(self, translation: Translation):
+        # db.session.scalar(db.select(func.count(Order.order_id)))
+
+        stmt = select(func.count(Verse.verse_id)).where(
+            Verse.translation_id == translation.translation_id
+        )
+        return self.session.scalars(stmt).one()
+
+    def create_verse(self, verse: entities.Verse):
+        stmt = insert(Verse).returning(Verse)
+        self.session.execute(stmt, verse._asdict())
         self.session.commit()

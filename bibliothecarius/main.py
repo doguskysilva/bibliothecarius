@@ -3,8 +3,12 @@ import os
 from dotenv import load_dotenv
 
 from bibliothecarius.controller import (
+    check_bible_by_tranlation,
+    get_all_translations,
     get_canon_by_name,
+    get_translation_by_id,
     mount_canon,
+    sync_bible_to_database,
     sync_books_to_database,
     sync_canons_to_database,
     sync_translations_to_database,
@@ -70,11 +74,34 @@ def list_books(ctx, canon_name):
 
 
 @cli.command()
+@click.pass_context
+def list_translations(ctx):
+    translations = get_all_translations(ctx.obj.db_session)
+    for translation in translations:
+        click.echo(f"{translation.translation_id} - {translation.name}")
+
+
+@cli.command()
 @click.argument("filename", type=click.Path(exists=True))
 @click.pass_context
 def sync_translations(ctx, filename):
     click.echo("Start sync translations")
     sync_translations_to_database(filename, ctx.obj.db_session)
+
+
+@cli.command()
+@click.option("-t", "--translation", "translation_id", type=int)
+@click.option("-b", "--bible", "bible", type=click.Path(exists=True))
+@click.pass_context
+def sync_bible(ctx, translation_id, bible):
+    sync_bible_to_database(translation_id, bible, ctx.obj.db_session)
+
+
+@cli.command()
+@click.option("-t", "--translation", "translation_id", type=int)
+@click.pass_context
+def check_bible(ctx, translation_id):
+    check_bible_by_tranlation(translation_id, ctx.obj.db_session)
 
 
 def main():

@@ -16,6 +16,8 @@ sqlalchemy = "^2.0.30"
 pytest-mock = "^3.14.0"
 
 
+faker = "^26.3.0"
+factory-boy = "^3.3.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

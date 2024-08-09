@@ -2,18 +2,22 @@ import csv
 
 import click
 
+from bibliothecarius.logic import generate_dict_ids
 from bibliothecarius.models.canon import BookCanon
 from bibliothecarius.mappers import (
     row_to_book,
     row_to_canon,
     row_to_canon_book,
     row_to_translation,
+    row_to_verse,
 )
 from sqlalchemy.orm import Session
 from bibliothecarius.repository import (
+    BookCanonRespository,
     BookRepository,
     CanonRepository,
     TranslationRepository,
+    VerseRepository,
 )
 
 
@@ -72,6 +76,57 @@ def get_all_canons(session: Session):
     return canon_repository.get_all()
 
 
+def get_all_translations(session: Session):
+    translation_repository = TranslationRepository(session)
+    return translation_repository.get_all()
+
+
+def get_translation_by_id(id: int, session: Session):
+    translation_repository = TranslationRepository(session)
+    return translation_repository.by_id(id)
+
+
 def get_canon_by_name(canon_name: str, session: Session):
     canon_repository = CanonRepository(session)
     return canon_repository.get_by_name(canon_name)
+
+
+def check_bible_by_tranlation(translation_id, session: Session):
+    translation_repository = TranslationRepository(session)
+    verse_repository = VerseRepository(session)
+
+    translation = translation_repository.by_id(translation_id)
+    total_verses = verse_repository.count_by_translation(translation)
+
+    if total_verses == translation.total_verses:
+        click.echo(f"Bible {translation.name} is consistent with {total_verses}")
+    else:
+        click.echo(f"Bible {translation.name} is not consistent")
+        click.echo(f"Expected {translation.total_verses} - {total_verses}")
+
+
+def sync_bible_to_database(translation_id: int, filename: str, session: Session):
+    translation_repository = TranslationRepository(session)
+    book_canon_repository = BookCanonRespository(session)
+    verse_repository = VerseRepository(session)
+
+    translation = translation_repository.by_id(translation_id)
+    books_canon = book_canon_repository.get_by_canon(translation.canon)
+
+    click.echo(f"Loading to translation - {translation.name}")
+
+    dicts_ids = generate_dict_ids(books_canon)
+
+    with open(filename, "r") as text_wrapper:
+        csv_reader = csv.DictReader(text_wrapper, delimiter=";")
+
+        for row in csv_reader:
+            book_id = int(row["book_id"])
+            verse = row_to_verse(
+                translation.translation_id,
+                dicts_ids[book_id],
+                row
+            )
+            verse_repository.create_verse(verse)
+
+    return 1

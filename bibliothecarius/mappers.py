@@ -41,11 +41,11 @@ def row_to_canon_book(canon_id: int, row: dict) -> entities.CanonBook:
     )
 
 
-def row_to_verse(translation_id: int, row: dict) -> entities.Verse:
+def row_to_verse(translation_id: int, book_id, row: dict) -> entities.Verse:
     return entities.Verse(
         translation_id=translation_id,
-        book_id=row["book_id"],
-        chapter=row["chapter"],
-        verse_number=row["number"],
+        book_id=book_id,
+        chapter=int(row["chapter"]),
+        verse_number=int(row["number"]),
         content=row["text"]
     )

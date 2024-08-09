@@ -1,3 +1,4 @@
+from faker import Faker
 from bibliothecarius.mappers import (
     row_to_book,
     row_to_canon,
@@ -7,12 +8,12 @@ from bibliothecarius.mappers import (
 )
 
 
-def test_row_to_book():
+def test_row_to_book(faker: Faker):
     row = {
-        "id": 42,
+        "id": faker.random_int(),
         "name": "1_book",
-        "testament": "old",
-        "chapters": 1,
+        "testament": faker.word(),
+        "chapters": faker.random_digit(),
     }
     output = row_to_book(row)
 
@@ -23,12 +24,12 @@ def test_row_to_book():
     assert row["chapters"] == output.total_chapters
 
 
-def test_row_to_canon():
+def test_row_to_canon(faker: Faker):
     row = {
-        "id": 42,
-        "name": "any_canon",
-        "tradition": "any_tradition",
-        "total_books": 42,
+        "id": faker.random_int(),
+        "name": faker.word(),
+        "tradition": faker.word(),
+        "total_books": faker.random_int(),
     }
     output = row_to_canon(row)
 
@@ -38,9 +39,9 @@ def test_row_to_canon():
     assert row["total_books"] == output.total_books
 
 
-def test_row_to_canon_book():
-    canon_id = 42
-    row = {"book_id": 42, "sort_index": 1}
+def test_row_to_canon_book(faker: Faker):
+    canon_id = faker.random_int()
+    row = {"book_id": faker.random_int(), "sort_index": faker.random_digit()}
     output = row_to_canon_book(canon_id, row)
 
     assert output.canon_id == canon_id
@@ -48,15 +49,15 @@ def test_row_to_canon_book():
     assert output.sort_index == row["sort_index"]
 
 
-def test_row_to_translation():
+def test_row_to_translation(faker: Faker):
     row = {
-        "id": 1,
-        "name": "any-name",
-        "description": "any-description",
+        "id": faker.random_int(),
+        "name": faker.word(),
+        "description": faker.text(),
         "language": "pt",
         "country": "br",
-        "total_verses": 42,
-        "canon_id": 1,
+        "total_verses": faker.random_int(),
+        "canon_id": faker.random_int(),
     }
     output = row_to_translation(row)
 
@@ -70,18 +71,18 @@ def test_row_to_translation():
     assert output.abbreviation == "pt-br"
 
 
-def test_row_to_verse():
-    translation_id = 42
+def test_row_to_verse(faker: Faker):
+    translation_id = faker.random_int()
+    book_id = faker.random_int()
     row = {
-        "book_id": 1,
-        "chapter": 2,
-        "number": 3,
-        "text": "any-text",
+        "chapter": faker.random_int(),
+        "number": faker.random_int(),
+        "text": faker.text(),
     }
-    output = row_to_verse(translation_id, row)
+    output = row_to_verse(translation_id, book_id, row)
 
     assert translation_id == output.translation_id
-    assert row["book_id"] == output.book_id
+    assert book_id == output.book_id
     assert row["chapter"] == output.chapter
     assert row["number"] == output.verse_number
     assert row["text"] == output.content

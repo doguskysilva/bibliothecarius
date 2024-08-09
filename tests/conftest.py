@@ -1,3 +1,4 @@
+from faker import Faker
 import pytest
 
 from bibliothecarius.context import db_session, get_engine
@@ -19,6 +20,11 @@ def db():
 @pytest.fixture
 def runner(db):
     return CliRunner()
+
+
+@pytest.fixture
+def faker():
+    return Faker()
 
 
 @pytest.fixture
