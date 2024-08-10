@@ -66,6 +66,11 @@ class BookCanonRespository:
         )
         return self.session.scalars(stmt).all()
 
+    def add(self, canon: Canon, book: Book, canon_book: entities.CanonBook):
+        relation = BookCanon(sort_index=canon_book.sort_index, book=book)
+        canon.books.append(relation)
+        self.session.commit()
+
 
 class TranslationRepository:
     def __init__(self, session: Session) -> None:
@@ -81,7 +86,7 @@ class TranslationRepository:
 
     def add(self, translation: entities.Translation):
         stmt = insert(Translation).returning(Translation)
-        result = self.session.scalar(stmt, translation)
+        result = self.session.scalar(stmt, translation._asdict())
         self.session.commit()
         return result
 

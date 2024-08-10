@@ -51,6 +51,7 @@ def sync_translations_to_database(filename: str, session: Session):
 def mount_canon(canon_name: str, filename: str, session: Session):
     canon_repository = CanonRepository(session)
     book_repository = BookRepository(session)
+    book_canon_repository = BookCanonRespository(session)
 
     canon = canon_repository.by_name(canon_name)
 
@@ -60,10 +61,12 @@ def mount_canon(canon_name: str, filename: str, session: Session):
 
         if canon.total_books == len(books_canon):
             for book_canon in books_canon:
-                relation = BookCanon(sort_index=book_canon.sort_index)
-                relation.book = book_repository.by_id(book_canon.book_id)
-                canon.books.append(relation)
-                session.commit()
+                book = book_repository.by_id(book_canon.book_id)
+                book_canon_repository.add(
+                    canon=canon,
+                    book=book,
+                    canon_book=book_canon
+                )
         else:
             exception = click.ClickException(
                 f"Was expected {canon.total_books} book, but resource has {len(books_canon)}"
