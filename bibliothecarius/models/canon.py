@@ -7,6 +7,7 @@ from bibliothecarius.models.book import Book
 
 class BookCanon(Base):
     __tablename__ = "book_canon"
+    
     book_canon_id: Mapped[int] = mapped_column(primary_key=True) 
     canon_id: Mapped[int] = mapped_column(ForeignKey("canons.canon_id"))
     book_id: Mapped[int] = mapped_column(ForeignKey("books.book_id"))
