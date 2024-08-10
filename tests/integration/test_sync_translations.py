@@ -11,7 +11,7 @@ def test_sync_translations(runner: CliRunner, bibliothecarius_context):
     translation_repository = TranslationRepository(bibliothecarius_context.db_session)
     canon_repository = CanonRepository(bibliothecarius_context.db_session)
 
-    canon_repository.create_canons(
+    canon_repository.add_many(
         [
             entities.Canon(
                 canon_id=2002, name="any-name", tradition="any-tradition", total_books=1
@@ -19,7 +19,7 @@ def test_sync_translations(runner: CliRunner, bibliothecarius_context):
         ]
     )
 
-    assert len(translation_repository.get_all()) == 0
+    assert len(translation_repository.all()) == 0
 
     with runner.isolated_filesystem():
         with open("translations.csv", "w") as file:
@@ -33,4 +33,4 @@ def test_sync_translations(runner: CliRunner, bibliothecarius_context):
         assert result.exit_code == 0
         assert "Start sync translations" in result.output
 
-        assert len(translation_repository.get_all()) == 1
+        assert len(translation_repository.all()) == 1

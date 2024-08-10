@@ -9,7 +9,7 @@ load_dotenv()
 def test_sync_canons(runner: CliRunner, bibliothecarius_context):
     canon_repository = CanonRepository(bibliothecarius_context.db_session)
 
-    assert len(canon_repository.get_all()) == 0
+    assert len(canon_repository.all()) == 0
 
     with runner.isolated_filesystem():
         with open("canons.csv", "w") as file:
@@ -23,4 +23,4 @@ def test_sync_canons(runner: CliRunner, bibliothecarius_context):
         assert result.exit_code == 0
         assert "Start sync canons" in result.output
 
-        assert len(canon_repository.get_all()) == 1
+        assert len(canon_repository.all()) == 1

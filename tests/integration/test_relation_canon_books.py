@@ -19,11 +19,11 @@ def test_relation_canon_books(runner: CliRunner, bibliothecarius_context):
         total_chapters=42,
     )
     canon = entities.Canon(canon_id=2000, name="any-canon", tradition="any", total_books=1)
-    book_repository.create_books([book])
-    canon_repository.create_canons([canon])
+    book_repository.add_many([book])
+    canon_repository.add_many([canon])
 
-    assert len(book_repository.get_all()) == 1
-    assert canon_repository.get_by_name("any-canon").canon_id == 2000
+    assert len(book_repository.all()) == 1
+    assert canon_repository.by_name("any-canon").canon_id == 2000
 
     with runner.isolated_filesystem():
         with open("books.csv", "w") as file:
@@ -37,7 +37,7 @@ def test_relation_canon_books(runner: CliRunner, bibliothecarius_context):
         assert result.exit_code == 0
         assert "Start relation books to any-canon" in result.output
 
-        canon_saved = canon_repository.get_by_name("any-canon")
+        canon_saved = canon_repository.by_name("any-canon")
         assert len(canon_saved.books) == 1
 
 
@@ -53,8 +53,8 @@ def test_relation_canon_books_should_be_false(runner: CliRunner, bibliothecarius
         total_chapters=42,
     )
     canon = entities.Canon(canon_id=2001, name="any-canon2", tradition="any", total_books=2)
-    book_repository.create_books([book])
-    canon_repository.create_canons([canon])
+    book_repository.add_many([book])
+    canon_repository.add_many([canon])
 
     with runner.isolated_filesystem():
         with open("books.csv", "w") as file:
@@ -68,5 +68,5 @@ def test_relation_canon_books_should_be_false(runner: CliRunner, bibliothecarius
 
         assert "Was expected 2 book, but resource has 1" in result.output
 
-        canon_saved = canon_repository.get_by_name("any-canon2")
+        canon_saved = canon_repository.by_name("any-canon2")
         assert len(canon_saved.books) == 0

@@ -27,7 +27,7 @@ def sync_books_to_database(filename: str, session: Session):
     with open(filename, "r") as text_wrapper:
         csv_reader = csv.DictReader(text_wrapper, delimiter=",")
         books = [row_to_book(book) for book in csv_reader]
-        book_repository.create_books(books)
+        book_repository.add_many(books)
 
 
 def sync_canons_to_database(filename: str, session: Session):
@@ -36,7 +36,7 @@ def sync_canons_to_database(filename: str, session: Session):
     with open(filename, "r") as text_wrapper:
         csv_reader = csv.DictReader(text_wrapper, delimiter=",")
         canons = [row_to_canon(row) for row in csv_reader]
-        canon_repository.create_canons(canons)
+        canon_repository.add_many(canons)
 
 
 def sync_translations_to_database(filename: str, session: Session):
@@ -45,14 +45,14 @@ def sync_translations_to_database(filename: str, session: Session):
     with open(filename, "r") as text_wrapper:
         csv_reader = csv.DictReader(text_wrapper, delimiter=",")
         translations = [row_to_translation(row) for row in csv_reader]
-        translation_repository.create_translations(translations)
+        translation_repository.add_many(translations)
 
 
 def mount_canon(canon_name: str, filename: str, session: Session):
     canon_repository = CanonRepository(session)
     book_repository = BookRepository(session)
 
-    canon = canon_repository.get_by_name(canon_name)
+    canon = canon_repository.by_name(canon_name)
 
     with open(filename, "r") as text_wrapper:
         csv_reader = csv.DictReader(text_wrapper, delimiter=",")
@@ -61,7 +61,7 @@ def mount_canon(canon_name: str, filename: str, session: Session):
         if canon.total_books == len(books_canon):
             for book_canon in books_canon:
                 relation = BookCanon(sort_index=book_canon.sort_index)
-                relation.book = book_repository.get_by_id(book_canon.book_id)
+                relation.book = book_repository.by_id(book_canon.book_id)
                 canon.books.append(relation)
                 session.commit()
         else:
@@ -73,12 +73,12 @@ def mount_canon(canon_name: str, filename: str, session: Session):
 
 def get_all_canons(session: Session):
     canon_repository = CanonRepository(session)
-    return canon_repository.get_all()
+    return canon_repository.all()
 
 
 def get_all_translations(session: Session):
     translation_repository = TranslationRepository(session)
-    return translation_repository.get_all()
+    return translation_repository.all()
 
 
 def get_translation_by_id(id: int, session: Session):
@@ -88,7 +88,7 @@ def get_translation_by_id(id: int, session: Session):
 
 def get_canon_by_name(canon_name: str, session: Session):
     canon_repository = CanonRepository(session)
-    return canon_repository.get_by_name(canon_name)
+    return canon_repository.by_name(canon_name)
 
 
 def check_bible_by_tranlation(translation_id, session: Session):
@@ -111,7 +111,7 @@ def sync_bible_to_database(translation_id: int, filename: str, session: Session)
     verse_repository = VerseRepository(session)
 
     translation = translation_repository.by_id(translation_id)
-    books_canon = book_canon_repository.get_by_canon(translation.canon)
+    books_canon = book_canon_repository.all_by_canon(translation.canon)
 
     click.echo(f"Loading to translation - {translation.name}")
 

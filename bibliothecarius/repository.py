@@ -12,16 +12,22 @@ class BookRepository:
     def __init__(self, session: Session) -> None:
         self.session = session
 
-    def get_by_id(self, id: int):
+    def by_id(self, id: int):
         stmt = select(Book).where(Book.book_id == id)
-        return self.session.scalars(stmt).first()
+        return self.session.scalar(stmt)
 
-    def get_all(self):
+    def all(self):
         return self.session.query(Book).all()
 
-    def create_books(self, books: List[entities.Book]):
+    def add(self, book: entities.Book):
         stmt = insert(Book).returning(Book)
-        self.session.scalars(stmt, [book._asdict() for book in books])
+        result = self.session.scalar(stmt, book._asdict())
+        self.session.commit()
+        return result
+
+    def add_many(self, books: List[entities.Book]):
+        stmt = insert(Book)
+        self.session.execute(stmt, [book._asdict() for book in books])
         self.session.commit()
 
 
@@ -29,16 +35,22 @@ class CanonRepository:
     def __init__(self, session: Session) -> None:
         self.session = session
 
-    def get_all(self):
+    def all(self):
         return self.session.query(Canon).all()
 
-    def get_by_name(self, name: str):
+    def by_name(self, name: str):
         stmt = select(Canon).where(Canon.name == name)
-        return self.session.scalars(stmt).first()
+        return self.session.scalar(stmt)
 
-    def create_canons(self, canons: List[entities.Canon]):
+    def add(self, canon: entities.Canon):
         stmt = insert(Canon).returning(Canon)
-        self.session.scalars(stmt, [canon._asdict() for canon in canons])
+        result = self.session.scalar(stmt, canon._asdict())
+        self.session.commit()
+        return result
+
+    def add_many(self, canons: List[entities.Canon]):
+        stmt = insert(Canon)
+        self.session.execute(stmt, [canon._asdict() for canon in canons])
         self.session.commit()
 
 
@@ -46,7 +58,7 @@ class BookCanonRespository:
     def __init__(self, session: Session) -> None:
         self.session = session
 
-    def get_by_canon(self, canon: Canon):
+    def all_by_canon(self, canon: Canon):
         stmt = (
             select(BookCanon)
             .where(BookCanon.canon_id == canon.canon_id)
@@ -59,17 +71,23 @@ class TranslationRepository:
     def __init__(self, session: Session) -> None:
         self.session = session
 
-    def get_all(self):
+    def all(self):
         stmt = select(Translation)
         return self.session.scalars(stmt).all()
 
     def by_id(self, id: int):
         stmt = select(Translation).where(Translation.translation_id == id)
-        return self.session.scalars(stmt).first()
+        return self.session.scalar(stmt)
 
-    def create_translations(self, translations: List[entities.Translation]):
+    def add(self, translation: entities.Translation):
         stmt = insert(Translation).returning(Translation)
-        self.session.scalars(
+        result = self.session.scalar(stmt, translation)
+        self.session.commit()
+        return result
+
+    def add_many(self, translations: List[entities.Translation]):
+        stmt = insert(Translation)
+        self.session.execute(
             stmt, [translation._asdict() for translation in translations]
         )
         self.session.commit()

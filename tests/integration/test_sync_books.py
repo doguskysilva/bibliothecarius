@@ -9,7 +9,7 @@ load_dotenv()
 def test_sync_books(runner: CliRunner, bibliothecarius_context):
     book_repository = BookRepository(bibliothecarius_context.db_session)
 
-    assert len(book_repository.get_all()) == 0
+    assert len(book_repository.all()) == 0
 
     with runner.isolated_filesystem():
         with open("books.csv", "w") as file:
@@ -23,4 +23,4 @@ def test_sync_books(runner: CliRunner, bibliothecarius_context):
         assert result.exit_code == 0
         assert "Start sync books" in result.output
 
-        assert len(book_repository.get_all()) == 1
+        assert len(book_repository.all()) == 1
