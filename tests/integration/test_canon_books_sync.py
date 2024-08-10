@@ -31,7 +31,7 @@ def test_relation_canon_books(runner: CliRunner, bibliothecarius_context):
 
         result = runner.invoke(
             cli,
-            ["relation-canon-books", "--canon", "any-canon", "--books", "books.csv"],
+            ["canon-books-sync", "--canon", "any-canon", "--books", "books.csv"],
             obj=bibliothecarius_context
         )
         assert result.exit_code == 0
@@ -62,7 +62,7 @@ def test_relation_canon_books_should_be_false(runner: CliRunner, bibliothecarius
 
         result = runner.invoke(
             cli,
-            ["relation-canon-books", "--canon", "any-canon2", "--books", "books.csv"],
+            ["canon-books-sync", "--canon", "any-canon2", "--books", "books.csv"],
             obj=bibliothecarius_context
         )
 

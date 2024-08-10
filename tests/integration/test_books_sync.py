@@ -6,7 +6,7 @@ from bibliothecarius.repository import BookRepository
 load_dotenv()
 
 
-def test_sync_books(runner: CliRunner, bibliothecarius_context):
+def test_books_sync(runner: CliRunner, bibliothecarius_context):
     book_repository = BookRepository(bibliothecarius_context.db_session)
 
     assert len(book_repository.all()) == 0
@@ -18,7 +18,7 @@ def test_sync_books(runner: CliRunner, bibliothecarius_context):
             )
 
         result = runner.invoke(
-            cli, ["sync-books", "books.csv"], obj=bibliothecarius_context
+            cli, ["books-sync", "books.csv"], obj=bibliothecarius_context
         )
         assert result.exit_code == 0
         assert "Start sync books" in result.output

@@ -6,7 +6,7 @@ from bibliothecarius.repository import CanonRepository
 load_dotenv()
 
 
-def test_sync_canons(runner: CliRunner, bibliothecarius_context):
+def test_canons_sync(runner: CliRunner, bibliothecarius_context):
     canon_repository = CanonRepository(bibliothecarius_context.db_session)
 
     assert len(canon_repository.all()) == 0
@@ -18,7 +18,7 @@ def test_sync_canons(runner: CliRunner, bibliothecarius_context):
             )
 
         result = runner.invoke(
-            cli, ["sync-canons", "canons.csv"], obj=bibliothecarius_context
+            cli, ["canons-sync", "canons.csv"], obj=bibliothecarius_context
         )
         assert result.exit_code == 0
         assert "Start sync canons" in result.output

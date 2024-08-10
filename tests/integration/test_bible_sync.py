@@ -44,7 +44,7 @@ def test_should_be_sync_all_verses(runner: CliRunner, bibliothecarius_context):
         result = runner.invoke(
             cli,
             [
-                "sync-bible",
+                "bible-sync",
                 "--translation",
                 created_translation.translation_id,
                 "--bible",
