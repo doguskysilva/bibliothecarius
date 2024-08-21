@@ -29,7 +29,7 @@ bibliothecarius canons-sync ./resources/canons.csv
 
 ## Add books to a canon
 ```bash
-bibliothecarius canons-books-sync  --canon roman_catholic --books ./resources/canons/roman_catholic_canon.csv
+bibliothecarius canons-books-sync  --canon roman_catholics --books ./resources/canons/roman_catholic_canon.csv
 ```
 
 ## List a canon

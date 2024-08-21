@@ -1,4 +1,4 @@
-from sqlalchemy import ForeignKey, Integer, String
+from sqlalchemy import Boolean, ForeignKey, Integer, String
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 
 from bibliothecarius.models.base import Base
@@ -19,6 +19,8 @@ class Verse(Base):
     chapter: Mapped[str] = mapped_column(Integer, nullable=False)
     verse_number: Mapped[str] = mapped_column(Integer, nullable=False)
     content: Mapped[str] = mapped_column(String, nullable=False)
+    title: Mapped[str] = mapped_column(String, nullable=True, default=None)
+    said_jesus: Mapped[bool] = mapped_column(Boolean, nullable=True, default=False)
 
     translation: Mapped["Translation"] = relationship()
     book: Mapped["Book"] = relationship()

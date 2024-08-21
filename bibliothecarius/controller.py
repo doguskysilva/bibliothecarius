@@ -55,6 +55,11 @@ def mount_canon(canon_name: str, filename: str, session: Session):
 
     canon = canon_repository.by_name(canon_name)
 
+    if canon is None:
+        exception = click.ClickException("Canon not found")
+        exception.show()
+        return -1
+
     with open(filename, "r") as text_wrapper:
         csv_reader = csv.DictReader(text_wrapper, delimiter=",")
         books_canon = [row_to_canon_book(canon.canon_id, row) for row in csv_reader]
