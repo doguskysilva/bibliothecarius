@@ -1,4 +1,4 @@
-id,name,description,language,country,total_verses,canon_id
-3001,"Nova Versão Internacional","Descrição",pt,br,31105,2002
-3002,"Almeida Revista e Atualizada","Descrição",pt,br,31104,2002
-3003,"Ave Maria","Description",pt,br,35450,2001
+id,name,description,language,country,total_verses,canon_id,hash
+3001,"Nova Versão Internacional","Descrição",pt,br,31105,2002,4856b32df3ea7c3158976767850118dddca369c2160c54c23e3bb10947df343e
+3002,"Almeida Revista e Atualizada","Descrição",pt,br,31104,2002,ec4819d8012bde811a699c6359cca9fb52aa698ba17ac34f26642945c50c1ef5
+3003,"Ave Maria","Description",pt,br,35450,2001,d87bb4b3f9a87023a2f1c112bfb6739518d286c2977df9482cc9d77f7c74a779
