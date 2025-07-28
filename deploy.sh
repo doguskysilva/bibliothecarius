@@ -20,7 +20,7 @@ bibliothecarius canon-books-sync --canon roman_catholics --books ./resources/can
 bibliothecarius canon-books-sync --canon protestant --books ./resources/canons/protestant_canon.csv
 
 # Add books to a canon (example: jewish)
-bibliothecarius canon-books-sync --canon jewish --books ./resources/canons/jewish_canon.csv
+# bibliothecarius canon-books-sync --canon jewish --books ./resources/canons/jewish_canon.csv
 
 # Load translations
 bibliothecarius translations-sync ./resources/translations.csv
