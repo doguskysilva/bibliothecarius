@@ -22,5 +22,10 @@ bibliothecarius canon-books-sync --canon protestant --books ./resources/canons/p
 # Load translations
 bibliothecarius translations-sync ./resources/translations.csv
 
-# Add a bible (example: NVI translation)
+# List translations
+bibliothecarius translations-list
+
+# Add bibles
 bibliothecarius bible-sync --translation 3001 --bible ./resources/bibles/nvi.csv
+bibliothecarius bible-sync --translation 3002 --bible ./resources/bibles/ara.csv
+bibliothecarius bible-sync --translation 3003 --bible ./resources/bibles/avm.csv
