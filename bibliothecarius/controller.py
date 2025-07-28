@@ -1,9 +1,8 @@
 import csv
 
 import click
+from sqlalchemy.orm import Session
 
-from bibliothecarius.logic import generate_dict_ids
-from bibliothecarius.models.canon import BookCanon
 from bibliothecarius.mappers import (
     row_to_book,
     row_to_canon,
@@ -11,7 +10,7 @@ from bibliothecarius.mappers import (
     row_to_translation,
     row_to_verse,
 )
-from sqlalchemy.orm import Session
+from bibliothecarius.models.canon import BookCanon
 from bibliothecarius.repository import (
     BookCanonRespository,
     BookRepository,
@@ -67,11 +66,7 @@ def mount_canon(canon_name: str, filename: str, session: Session):
         if canon.total_books == len(books_canon):
             for book_canon in books_canon:
                 book = book_repository.by_id(book_canon.book_id)
-                book_canon_repository.add(
-                    canon=canon,
-                    book=book,
-                    canon_book=book_canon
-                )
+                book_canon_repository.add(canon=canon, book=book, canon_book=book_canon)
         else:
             exception = click.ClickException(
                 f"Was expected {canon.total_books} book, but resource has {len(books_canon)}"
@@ -115,26 +110,17 @@ def check_bible_by_tranlation(translation_id, session: Session):
 
 def sync_bible_to_database(translation_id: int, filename: str, session: Session):
     translation_repository = TranslationRepository(session)
-    book_canon_repository = BookCanonRespository(session)
     verse_repository = VerseRepository(session)
 
     translation = translation_repository.by_id(translation_id)
-    books_canon = book_canon_repository.all_by_canon(translation.canon)
 
     click.echo(f"Loading to translation - {translation.name}")
-
-    dicts_ids = generate_dict_ids(books_canon)
 
     with open(filename, "r") as text_wrapper:
         csv_reader = csv.DictReader(text_wrapper, delimiter=";")
 
         for row in csv_reader:
-            book_id = int(row["book_id"])
-            verse = row_to_verse(
-                translation.translation_id,
-                dicts_ids[book_id],
-                row
-            )
+            verse = row_to_verse(translation.translation_id, row)
             verse_repository.create_verse(verse)
 
     return 1

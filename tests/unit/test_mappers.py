@@ -1,4 +1,5 @@
 from faker import Faker
+
 from bibliothecarius.mappers import (
     row_to_book,
     row_to_canon,
@@ -73,16 +74,16 @@ def test_row_to_translation(faker: Faker):
 
 def test_row_to_verse(faker: Faker):
     translation_id = faker.random_int()
-    book_id = faker.random_int()
     row = {
+        "book_id": faker.random_int(),
         "chapter": faker.random_int(),
         "number": faker.random_int(),
         "text": faker.text(),
     }
-    output = row_to_verse(translation_id, book_id, row)
+    output = row_to_verse(translation_id, row)
 
     assert translation_id == output.translation_id
-    assert book_id == output.book_id
+    assert row["book_id"] == output.book_id
     assert row["chapter"] == output.chapter
     assert row["number"] == output.verse_number
     assert row["text"] == output.content

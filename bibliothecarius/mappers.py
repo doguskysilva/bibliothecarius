@@ -16,7 +16,7 @@ def row_to_canon(row: dict) -> entities.Canon:
         canon_id=row["id"],
         name=row["name"],
         tradition=row["tradition"],
-        total_books=row["total_books"]
+        total_books=row["total_books"],
     )
 
 
@@ -29,23 +29,21 @@ def row_to_translation(row: dict) -> entities.Translation:
         language=row["language"],
         country=row["country"],
         total_verses=row["total_verses"],
-        canon_id=row["canon_id"]
+        canon_id=row["canon_id"],
     )
 
 
 def row_to_canon_book(canon_id: int, row: dict) -> entities.CanonBook:
     return entities.CanonBook(
-        canon_id=canon_id,
-        book_id=row["book_id"],
-        sort_index=row["sort_index"]
+        canon_id=canon_id, book_id=row["book_id"], sort_index=row["sort_index"]
     )
 
 
-def row_to_verse(translation_id: int, book_id, row: dict) -> entities.Verse:
+def row_to_verse(translation_id: int, row: dict) -> entities.Verse:
     return entities.Verse(
         translation_id=translation_id,
-        book_id=book_id,
+        book_id=int(row["book_id"]),
         chapter=int(row["chapter"]),
         verse_number=int(row["number"]),
-        content=row["text"]
+        content=row["text"],
     )
