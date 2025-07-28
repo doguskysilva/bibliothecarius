@@ -8,10 +8,7 @@ Book = collections.namedtuple(
     "Book", ["book_id", "name", "testament", "abbreviation", "total_chapters"]
 )
 
-CanonBook = collections.namedtuple(
-    "CanonBook",
-    ["canon_id", "book_id", "sort_index"]
-)
+CanonBook = collections.namedtuple("CanonBook", ["canon_id", "book_id", "sort_index"])
 
 Translation = collections.namedtuple(
     "Translation",
@@ -24,16 +21,10 @@ Translation = collections.namedtuple(
         "abbreviation",
         "total_verses",
         "canon_id",
+        "hash",
     ],
 )
 
 Verse = collections.namedtuple(
-    "Verse",
-    [
-        "book_id",
-        "translation_id",
-        "chapter",
-        "verse_number",
-        "content"
-    ]
+    "Verse", ["book_id", "translation_id", "chapter", "verse_number", "content"]
 )

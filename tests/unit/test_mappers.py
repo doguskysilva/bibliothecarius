@@ -59,6 +59,7 @@ def test_row_to_translation(faker: Faker):
         "country": "br",
         "total_verses": faker.random_int(),
         "canon_id": faker.random_int(),
+        "hash": faker.sha256(),
     }
     output = row_to_translation(row)
 
@@ -70,6 +71,7 @@ def test_row_to_translation(faker: Faker):
     assert output.country == row["country"]
     assert output.total_verses == row["total_verses"]
     assert output.abbreviation == "pt-br"
+    assert output.hash == row["hash"]
 
 
 def test_row_to_verse(faker: Faker):

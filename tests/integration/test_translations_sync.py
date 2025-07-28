@@ -1,5 +1,6 @@
 from click.testing import CliRunner
 from dotenv import load_dotenv
+
 from bibliothecarius import entities
 from bibliothecarius.main import cli
 from bibliothecarius.repository import CanonRepository, TranslationRepository
@@ -24,7 +25,7 @@ def test_translations_sync(runner: CliRunner, bibliothecarius_context):
     with runner.isolated_filesystem():
         with open("translations.csv", "w") as file:
             file.write(
-                "id,name,description,language,country,total_verses,canon_id\n1,any-name,descrição,pt,br,31105,2002"
+                "id,name,description,language,country,total_verses,canon_id,hash\n1,any-name,descrição,pt,br,31105,2002,123abc"
             )
 
         result = runner.invoke(

@@ -30,6 +30,7 @@ def row_to_translation(row: dict) -> entities.Translation:
         country=row["country"],
         total_verses=row["total_verses"],
         canon_id=row["canon_id"],
+        hash=row["hash"],
     )
 
 

@@ -8,9 +8,9 @@ Create Date: 2024-07-31 02:37:36.487824
 
 from typing import Sequence, Union
 
-from alembic import op
 import sqlalchemy as sa
 
+from alembic import op
 
 # revision identifiers, used by Alembic.
 revision: str = "81b1c93eeacc"
@@ -31,6 +31,7 @@ def upgrade() -> None:
         sa.Column("language", sa.String(), nullable=False),
         sa.Column("country", sa.String(), nullable=False),
         sa.Column("total_verses", sa.Integer(), nullable=False),
+        sa.Column("hash", sa.String(), nullable=False),
         sa.ForeignKeyConstraint(
             ["canon_id"],
             ["canons.canon_id"],

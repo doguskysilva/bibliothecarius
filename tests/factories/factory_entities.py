@@ -18,24 +18,26 @@ class CanonFactoryEntity(factory.Factory):
     class Meta:
         model = Canon
 
-    canon_id = factory.Faker('random_int')
-    name = factory.Faker('word')
-    tradition = factory.Faker('word')
-    total_books = factory.Faker('random_digit')
+    canon_id = factory.Faker("random_int")
+    name = factory.Faker("word")
+    tradition = factory.Faker("word")
+    total_books = factory.Faker("random_digit")
 
 
 class TranslationFactoryEntity(factory.Factory):
     class Meta:
         model = Translation
 
-    translation_id = factory.Faker('random_int')
-    canon_id = factory.Faker('random_int')
-    name = factory.Faker('word')
-    description = factory.Faker('text')
-    abbreviation = factory.Faker('word')
-    language = factory.Faker('language_code')
-    country = factory.Faker('country_code')
-    total_verses = factory.Faker('random_int')
+    translation_id = factory.Faker("random_int")
+    canon_id = factory.Faker("random_int")
+    name = factory.Faker("word")
+    description = factory.Faker("text")
+    abbreviation = factory.Faker("word")
+    language = factory.Faker("language_code")
+    country = factory.Faker("country_code")
+    total_verses = factory.Faker("random_int")
+    hash = factory.Faker("sha256")
+
 
 # class BookCanonFactory(factory.Factory):
 #     class Meta:

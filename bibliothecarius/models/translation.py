@@ -1,7 +1,7 @@
-from bibliothecarius.models.base import Base
-from sqlalchemy.orm import mapped_column, Mapped, relationship
-from sqlalchemy import ForeignKey, String, Integer
+from sqlalchemy import ForeignKey, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from bibliothecarius.models.base import Base
 from bibliothecarius.models.canon import Canon
 
 
@@ -18,6 +18,7 @@ class Translation(Base):
     language: Mapped[str] = mapped_column(String, nullable=False)
     country: Mapped[str] = mapped_column(String, nullable=False)
     total_verses: Mapped[int] = mapped_column(Integer, nullable=False)
+    hash: Mapped[str] = mapped_column(String, nullable=False)
 
     canon: Mapped["Canon"] = relationship()
 
