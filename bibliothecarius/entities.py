@@ -1,30 +1,30 @@
 import collections
 
 Canon = collections.namedtuple(
-    "Canon", ["canon_id", "name", "tradition", "total_books"]
+    "Canon", ["id", "name", "tradition", "totalBooks"]
 )
 
 Book = collections.namedtuple(
-    "Book", ["book_id", "name", "testament", "abbreviation", "total_chapters"]
+    "Book", ["id", "name", "testament", "abbreviation", "totalChapters"]
 )
 
-CanonBook = collections.namedtuple("CanonBook", ["canon_id", "book_id", "sort_index"])
+CanonBook = collections.namedtuple("CanonBook", ["canonId", "bookId", "sortIndex"])
 
 Translation = collections.namedtuple(
     "Translation",
     [
-        "translation_id",
+        "id",
         "name",
         "description",
         "language",
         "country",
         "abbreviation",
-        "total_verses",
-        "canon_id",
+        "totalVerses",
+        "canonId",
         "hash",
     ],
 )
 
 Verse = collections.namedtuple(
-    "Verse", ["book_id", "translation_id", "chapter", "verse_number", "content"]
+    "Verse", ["bookId", "translationId", "chapter", "verseNumber", "content"]
 )

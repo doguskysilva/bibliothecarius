@@ -18,11 +18,11 @@ def test_row_to_book(faker: Faker):
     }
     output = row_to_book(row)
 
-    assert row["id"] == output.book_id
+    assert row["id"] == output.id
     assert row["name"] == output.name
     assert "1bo" == output.abbreviation
     assert row["testament"] == output.testament
-    assert row["chapters"] == output.total_chapters
+    assert row["chapters"] == output.totalChapters
 
 
 def test_row_to_canon(faker: Faker):
@@ -34,10 +34,10 @@ def test_row_to_canon(faker: Faker):
     }
     output = row_to_canon(row)
 
-    assert row["id"] == output.canon_id
+    assert row["id"] == output.id
     assert row["name"] == output.name
     assert row["tradition"] == output.tradition
-    assert row["total_books"] == output.total_books
+    assert row["total_books"] == output.totalBooks
 
 
 def test_row_to_canon_book(faker: Faker):
@@ -45,9 +45,9 @@ def test_row_to_canon_book(faker: Faker):
     row = {"book_id": faker.random_int(), "sort_index": faker.random_digit()}
     output = row_to_canon_book(canon_id, row)
 
-    assert output.canon_id == canon_id
-    assert output.book_id == row["book_id"]
-    assert output.sort_index == row["sort_index"]
+    assert output.canonId == canon_id
+    assert output.bookId == row["book_id"]
+    assert output.sortIndex == row["sort_index"]
 
 
 def test_row_to_translation(faker: Faker):
@@ -63,13 +63,13 @@ def test_row_to_translation(faker: Faker):
     }
     output = row_to_translation(row)
 
-    assert output.translation_id == row["id"]
-    assert output.canon_id == row["canon_id"]
+    assert output.id == row["id"]
+    assert output.canonId == row["canon_id"]
     assert output.name == row["name"]
     assert output.description == row["description"]
     assert output.language == row["language"]
     assert output.country == row["country"]
-    assert output.total_verses == row["total_verses"]
+    assert output.totalVerses == row["total_verses"]
     assert output.abbreviation == "pt-br"
     assert output.hash == row["hash"]
 
@@ -84,8 +84,8 @@ def test_row_to_verse(faker: Faker):
     }
     output = row_to_verse(translation_id, row)
 
-    assert translation_id == output.translation_id
-    assert row["book_id"] == output.book_id
+    assert translation_id == output.translationId
+    assert row["book_id"] == output.bookId
     assert row["chapter"] == output.chapter
-    assert row["number"] == output.verse_number
+    assert row["number"] == output.verseNumber
     assert row["text"] == output.content

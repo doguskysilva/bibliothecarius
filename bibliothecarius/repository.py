@@ -13,7 +13,7 @@ class BookRepository:
         self.session = session
 
     def by_id(self, id: int):
-        stmt = select(Book).where(Book.book_id == id)
+        stmt = select(Book).where(Book.id == id)
         return self.session.scalar(stmt)
 
     def all(self):
@@ -61,13 +61,13 @@ class BookCanonRespository:
     def all_by_canon(self, canon: Canon):
         stmt = (
             select(BookCanon)
-            .where(BookCanon.canon_id == canon.canon_id)
-            .order_by(BookCanon.sort_index)
+            .where(BookCanon.canonId == canon.id)
+            .order_by(BookCanon.sortIndex)
         )
         return self.session.scalars(stmt).all()
 
     def add(self, canon: Canon, book: Book, canon_book: entities.CanonBook):
-        relation = BookCanon(sort_index=canon_book.sort_index, book=book)
+        relation = BookCanon(sortIndex=canon_book.sortIndex, book=book)
         canon.books.append(relation)
         self.session.commit()
 
@@ -81,7 +81,7 @@ class TranslationRepository:
         return self.session.scalars(stmt).all()
 
     def by_id(self, id: int):
-        stmt = select(Translation).where(Translation.translation_id == id)
+        stmt = select(Translation).where(Translation.id == id)
         return self.session.scalar(stmt)
 
     def add(self, translation: entities.Translation):
@@ -103,8 +103,8 @@ class VerseRepository:
         self.session = session
 
     def count_by_translation(self, translation: Translation):
-        stmt = select(func.count(Verse.verse_id)).where(
-            Verse.translation_id == translation.translation_id
+        stmt = select(func.count(Verse.id)).where(
+            Verse.translationId == translation.id
         )
         return self.session.scalars(stmt).one()
 
