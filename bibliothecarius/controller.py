@@ -10,7 +10,6 @@ from bibliothecarius.mappers import (
     row_to_translation,
     row_to_verse,
 )
-from bibliothecarius.models.canon import BookCanon
 from bibliothecarius.repository import (
     BookCanonRespository,
     BookRepository,

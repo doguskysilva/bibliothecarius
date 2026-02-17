@@ -6,10 +6,10 @@ from sqlalchemy import pool
 from alembic import context
 
 from bibliothecarius.models.base import Base
-import bibliothecarius.models.book
-import bibliothecarius.models.canon
-import bibliothecarius.models.translation
-import bibliothecarius.models.verse
+import bibliothecarius.models.book  # noqa: F401
+import bibliothecarius.models.canon  # noqa: F401
+import bibliothecarius.models.translation  # noqa: F401
+import bibliothecarius.models.verse  # noqa: F401
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
