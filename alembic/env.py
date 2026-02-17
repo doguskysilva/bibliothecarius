@@ -7,9 +7,7 @@ from alembic import context
 
 from bibliothecarius.models.base import Base
 import bibliothecarius.models.book
-import bibliothecarius.models.bookmark
 import bibliothecarius.models.canon
-import bibliothecarius.models.favorite
 import bibliothecarius.models.translation
 import bibliothecarius.models.verse
 

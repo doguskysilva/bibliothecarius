@@ -1,7 +1,7 @@
 """update verse table
 
 Revision ID: 0990945f64b1
-Revises: d89c65ef679f
+Revises: a0522eeab268
 Create Date: 2024-08-18 16:04:14.945666
 
 """
@@ -14,7 +14,7 @@ from alembic import op
 
 # revision identifiers, used by Alembic.
 revision: str = "0990945f64b1"
-down_revision: Union[str, None] = "d89c65ef679f"
+down_revision: Union[str, None] = "a0522eeab268"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
