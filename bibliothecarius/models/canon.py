@@ -8,10 +8,10 @@ from bibliothecarius.models.book import Book
 class BookCanon(Base):
     __tablename__ = "book_canon"
     
-    book_canon_id: Mapped[int] = mapped_column(primary_key=True) 
-    canon_id: Mapped[int] = mapped_column(ForeignKey("canons.canon_id"))
-    book_id: Mapped[int] = mapped_column(ForeignKey("books.book_id"))
-    sort_index: Mapped[int]
+    book_canon_id: Mapped[int] = mapped_column("id", primary_key=True)
+    canon_id: Mapped[int] = mapped_column("canonId", ForeignKey("canons.id"))
+    book_id: Mapped[int] = mapped_column("bookId", ForeignKey("books.id"))
+    sort_index: Mapped[int] = mapped_column("sortIndex")
     book: Mapped["Book"] = relationship()
 
     def __repr__(self) -> str:
@@ -21,10 +21,10 @@ class BookCanon(Base):
 class Canon(Base):
     __tablename__ = "canons"
 
-    canon_id: Mapped[int] = mapped_column(primary_key=True)
+    canon_id: Mapped[int] = mapped_column("id", primary_key=True)
     name: Mapped[str] = mapped_column(String, nullable=False)
     tradition: Mapped[str] = mapped_column(String, nullable=False)
-    total_books: Mapped[int] = mapped_column(Integer, nullable=False)
+    total_books: Mapped[int] = mapped_column("totalBooks", Integer, nullable=False)
 
     books: Mapped[List["BookCanon"]] = relationship()
 

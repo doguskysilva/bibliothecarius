@@ -9,14 +9,14 @@ from bibliothecarius.models.translation import Translation
 class Bookmark(Base):
     __tablename__ = "bookmarks"
 
-    bookmark_id: Mapped[int] = mapped_column(primary_key=True)
+    bookmark_id: Mapped[int] = mapped_column("id", primary_key=True)
     translation_id: Mapped[int] = mapped_column(
-        ForeignKey("translations.translation_id")
+        "translationId", ForeignKey("translations.id")
     )
-    book_id: Mapped[int] = mapped_column(ForeignKey("books.book_id"))
+    book_id: Mapped[int] = mapped_column("bookId", ForeignKey("books.id"))
     chapter: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
-    created_at: Mapped[int] = mapped_column(Integer, nullable=False)
-    updated_at: Mapped[int] = mapped_column(Integer, nullable=False)
+    created_at: Mapped[int] = mapped_column("createdAt", Integer, nullable=False)
+    updated_at: Mapped[int] = mapped_column("updatedAt", Integer, nullable=False)
 
     translation: Mapped["Translation"] = relationship()
     book: Mapped["Book"] = relationship()
