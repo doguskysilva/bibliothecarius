@@ -5,6 +5,7 @@ PYTEST_CMD ?= $(UV) run pytest
 INSTALL_CMD ?= $(UV) sync
 
 DB_FILE ?= database/scripturas.sqlite
+APP_DB_FILE ?= database/scripturas-app.sqlite
 DATABASE_URL ?= sqlite:///$(DB_FILE)
 export DATABASE_URL
 
@@ -23,7 +24,7 @@ NVI_ID ?= 3001
 ARA_ID ?= 3002
 AVM_ID ?= 3003
 
-.PHONY: help install test db-migrate db-reset db-rebuild db-seed db-build \
+.PHONY: help install test db-migrate db-reset db-rebuild db-seed db-build db-app-copy \
 	books-sync canons-sync canon-books-sync translations-sync bibles-sync \
 	bible-check-all translations-list
 
@@ -42,6 +43,7 @@ help:
 	@echo "  make bible-check-all   - Validate loaded bible totals"
 	@echo "  make db-seed           - Load all seed resources"
 	@echo "  make db-build          - Full rebuild + seed + check"
+	@echo "  make db-app-copy       - Duplicate DB and remove alembic_version table"
 	@echo "  make translations-list - Show translation ids"
 
 install:
@@ -87,3 +89,7 @@ bible-check-all:
 db-seed: books-sync canons-sync canon-books-sync translations-sync bibles-sync
 
 db-build: db-rebuild db-seed bible-check-all
+
+db-app-copy:
+	cp $(DB_FILE) $(APP_DB_FILE)
+	sqlite3 $(APP_DB_FILE) "DROP TABLE IF EXISTS alembic_version;"
