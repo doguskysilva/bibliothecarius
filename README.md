@@ -1,63 +1,119 @@
 # Bibliothecarius
 
-## Developer
+Bibliothecarius is the database builder for Scripturas.
 
-To activate virtual environement use
+It exists to create and keep a prepopulated SQLite database with:
+
+- books
+- canons
+- translations
+- verses
+
+This database is generated from CSV resources and consumed by the Scripturas app.
+
+## Why this project exists
+
+Scripturas needs a consistent and reproducible Bible dataset.
+Bibliothecarius centralizes this process so data can be versioned, validated, and rebuilt in any environment (local or CI) with the same result.
+
+## Architecture
+
+The project follows a simple layered architecture:
+
+1. **Input resources** (`resources/*.csv`, `resources/bibles/*.csv`, `resources/canons/*.csv`)
+2. **CLI layer** (`bibliothecarius.main`) exposes sync/check commands
+3. **Controller layer** (`bibliothecarius.controller`) orchestrates import flows and validations
+4. **Mapper layer** (`bibliothecarius.mappers`) converts CSV rows into internal entities
+5. **Repository layer** (`bibliothecarius.repository`) persists/query data with SQLAlchemy
+6. **Model layer** (`bibliothecarius.models.*`) defines tables and relationships
+7. **Database layer** (SQLite + Alembic migrations)
+
+### Data flow
+
+`CSV resources -> CLI command -> controller -> mappers -> repositories -> SQLite database`
+
+### Database schema
+
+Main tables:
+
+- `books`
+- `canons`
+- `book_canon`
+- `translations`
+- `verses`
+
+Schema creation and updates are managed by Alembic migrations in `alembic/versions`.
+
+## Developer setup
+
+Install and sync dependencies:
 
 ```bash
-poetry shell
+uv sync
 ```
 
-To leave
+Run commands inside project environment:
 
 ```bash
-exit
+uv run <command>
 ```
 
-## To restart database
+## Build complete database (recommended)
+
+Use the Makefile pipeline:
 
 ```bash
-rm database/scripturas.sqlite &&  alembic -x data=true upgrade head
+make db-build
 ```
 
-## Load books
+This will reset the database, run migrations, import resources, and run bible consistency checks.
+
+## Useful commands
+
+Restart database schema:
 
 ```bash
-bibliothecarius books-sync ./resources/books.csv
+rm database/scripturas.sqlite && uv run alembic -x data=true upgrade head
 ```
 
-## Load canons
+Load books:
 
 ```bash
-bibliothecarius canons-sync ./resources/canons.csv
+uv run bibliothecarius books-sync ./resources/books.csv
 ```
 
-## Add books to a canon
+Load canons:
 
 ```bash
-bibliothecarius canon-books-sync  --canon roman_catholics --books ./resources/canons/roman_catholic_canon.csv
+uv run bibliothecarius canons-sync ./resources/canons.csv
 ```
 
-## List a canon
+Add books to a canon:
 
 ```bash
-bibliothecarius books-list --canon protestant
+uv run bibliothecarius canon-books-sync  --canon roman_catholics --books ./resources/canons/roman_catholic_canon.csv
 ```
 
-## Load translations
+List a canon:
 
 ```bash
-bibliothecarius translations-sync ./resources/translations.csv
+uv run bibliothecarius books-list --canon protestant
 ```
 
-## List translations
+Load translations:
 
 ```bash
-bibliothecarius translations-list
+uv run bibliothecarius translations-sync ./resources/translations.csv
 ```
 
-## Add a bible
+List translations:
 
 ```bash
-bibliothecarius bible-sync --translation 3001 --bible ./resources/bibles/nvi.csv
+uv run bibliothecarius translations-list
+```
+
+Load a bible:
+
+```bash
+uv run bibliothecarius bible-sync --translation 3001 --bible ./resources/bibles/nvi.csv
 ```
