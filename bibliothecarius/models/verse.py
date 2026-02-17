@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, ForeignKey, Integer, String
+from sqlalchemy import ForeignKey, Index, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from bibliothecarius.models.base import Base
@@ -8,6 +8,17 @@ from bibliothecarius.models.translation import Translation
 
 class Verse(Base):
     __tablename__ = "verses"
+    __table_args__ = (
+        Index("ix_verses_book_id", "book_id"),
+        Index("ix_verses_translation_id", "translation_id"),
+        Index(
+            "ix_verses_translation_id_book_id_chapter_verse_number",
+            "translation_id",
+            "book_id",
+            "chapter",
+            "verse_number",
+        ),
+    )
 
     verse_id: Mapped[int] = mapped_column(primary_key=True)
     translation_id: Mapped[int] = mapped_column(
