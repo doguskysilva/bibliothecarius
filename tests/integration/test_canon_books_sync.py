@@ -12,18 +12,18 @@ def test_relation_canon_books(runner: CliRunner, bibliothecarius_context):
     canon_repository = CanonRepository(bibliothecarius_context.db_session)
 
     book = entities.Book(
-        book_id=1000,
+        id=1000,
         name="any-book",
         testament="old",
         abbreviation="anb",
-        total_chapters=42,
+        totalChapters=42,
     )
-    canon = entities.Canon(canon_id=2000, name="any-canon", tradition="any", total_books=1)
+    canon = entities.Canon(id=2000, name="any-canon", tradition="any", totalBooks=1)
     book_repository.add_many([book])
     canon_repository.add_many([canon])
 
     assert len(book_repository.all()) == 1
-    assert canon_repository.by_name("any-canon").canon_id == 2000
+    assert canon_repository.by_name("any-canon").id == 2000
 
     with runner.isolated_filesystem():
         with open("books.csv", "w") as file:
@@ -46,13 +46,13 @@ def test_relation_canon_books_should_be_false(runner: CliRunner, bibliothecarius
     canon_repository = CanonRepository(bibliothecarius_context.db_session)
 
     book = entities.Book(
-        book_id=1001,
+        id=1001,
         name="any-book",
         testament="old",
         abbreviation="anb",
-        total_chapters=42,
+        totalChapters=42,
     )
-    canon = entities.Canon(canon_id=2001, name="any-canon2", tradition="any", total_books=2)
+    canon = entities.Canon(id=2001, name="any-canon2", tradition="any", totalBooks=2)
     book_repository.add_many([book])
     canon_repository.add_many([canon])
 

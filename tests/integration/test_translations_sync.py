@@ -15,7 +15,7 @@ def test_translations_sync(runner: CliRunner, bibliothecarius_context):
     canon_repository.add_many(
         [
             entities.Canon(
-                canon_id=2002, name="any-name", tradition="any-tradition", total_books=1
+                id=2002, name="any-name", tradition="any-tradition", totalBooks=1
             )
         ]
     )

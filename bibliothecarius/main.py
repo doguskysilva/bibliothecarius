@@ -69,7 +69,7 @@ def canon_books_sync(ctx, canon, books):
 def books_list(ctx, canon_name):
     canon = get_canon_by_name(canon_name, ctx.obj.db_session)
     for relation in canon.books:
-        click.echo(f"{relation.sort_index} - {relation.book.name}")
+        click.echo(f"{relation.sortIndex} - {relation.book.name}")
 
 
 @cli.command()
@@ -77,7 +77,7 @@ def books_list(ctx, canon_name):
 def translations_list(ctx):
     translations = get_all_translations(ctx.obj.db_session)
     for translation in translations:
-        click.echo(f"{translation.translation_id} - {translation.name}")
+        click.echo(f"{translation.id} - {translation.name}")
 
 
 @cli.command()
@@ -89,18 +89,18 @@ def translations_sync(ctx, filename):
 
 
 @cli.command()
-@click.option("-t", "--translation", "translation_id", type=int)
+@click.option("-t", "--translation", "translationId", type=int)
 @click.option("-b", "--bible", "bible", type=click.Path(exists=True))
 @click.pass_context
-def bible_sync(ctx, translation_id, bible):
-    sync_bible_to_database(translation_id, bible, ctx.obj.db_session)
+def bible_sync(ctx, translationId, bible):
+    sync_bible_to_database(translationId, bible, ctx.obj.db_session)
 
 
 @cli.command()
-@click.option("-t", "--translation", "translation_id", type=int)
+@click.option("-t", "--translation", "translationId", type=int)
 @click.pass_context
-def bible_check(ctx, translation_id):
-    check_bible_by_tranlation(translation_id, ctx.obj.db_session)
+def bible_check(ctx, translationId):
+    check_bible_by_tranlation(translationId, ctx.obj.db_session)
 
 
 def main():

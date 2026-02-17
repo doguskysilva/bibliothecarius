@@ -27,8 +27,8 @@ def test_should_be_sync_all_verses(runner: CliRunner, bibliothecarius_context):
 
     book = BookFactoryEntity()
     canon = CanonFactoryEntity()
-    translation = TranslationFactoryEntity(canon_id=canon.canon_id)
-    canon_book = CanonBook(book_id=book.book_id, canon_id=canon.canon_id, sort_index=1)
+    translation = TranslationFactoryEntity(canonId=canon.id)
+    canon_book = CanonBook(bookId=book.id, canonId=canon.id, sortIndex=1)
 
     created_book = book_repository.add(book)
     created_canon = canon_repository.add(canon)
@@ -46,7 +46,7 @@ def test_should_be_sync_all_verses(runner: CliRunner, bibliothecarius_context):
             [
                 "bible-sync",
                 "--translation",
-                created_translation.translation_id,
+                created_translation.id,
                 "--bible",
                 "bible.csv",
             ],
