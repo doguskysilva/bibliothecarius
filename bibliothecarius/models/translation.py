@@ -1,4 +1,4 @@
-from sqlalchemy import ForeignKey, Integer, String
+from sqlalchemy import ForeignKey, Index, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from bibliothecarius.models.base import Base
@@ -7,6 +7,7 @@ from bibliothecarius.models.canon import Canon
 
 class Translation(Base):
     __tablename__ = "translations"
+    __table_args__ = (Index("ix_translations_canonId", "canonId"),)
 
     id: Mapped[int] = mapped_column(primary_key=True)
     canonId: Mapped[int] = mapped_column(
